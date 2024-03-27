@@ -1,0 +1,22 @@
+- name: Cisco show version example
+  hosts: Router1:Router2:Router3
+  gather_facts: false
+
+  tasks:
+  - name: Run show version command
+    ios_command:
+      commands: show version | incl Version
+    register: version_output
+
+  - name: Print output of show version command
+    debug:
+      var: version_output.stout_lines
+
+  - name: Print router hostname and interfaces
+    debug:
+      msg: |
+        Hostname: {{ router_info.ansible_net_hostname }}
+        Interfaces: {{ router_info.ansible_net_interfaces }}
+
+
+

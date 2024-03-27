@@ -1,0 +1,19 @@
+- name: Cisco configure interface and save config
+  hosts: Router1:Router2:Router3
+  gather_facts: false
+  vars:
+    interface_name: "Fa0/0"
+    ip_address: "192.168.10.1"
+    subnet_mask: "255.255.255.0"
+
+  tasks:
+    - name: Configure interface {{ interface_name }} with IP address
+      ios_config:
+        lines:
+          - interface {{ interface_name }}
+          - ip address {{ ip_address }} {{ subnet_mask }}
+
+    - name: Save configuration
+      ios_command:
+        commands:
+          - copy running-config startup-config
