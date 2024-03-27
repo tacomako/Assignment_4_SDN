@@ -8,7 +8,7 @@
 
   tasks:
     - name: Configure interface {{ interface_name }} with IP address
-      ios_config:
+      ios_interface:
         lines:
           - interface {{ interface_name }}
           - ip address {{ ip_address }} {{ subnet_mask }}
